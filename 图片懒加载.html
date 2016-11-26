@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片懒加载</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul li {
+            width: 400px;
+            height: 450px;
+            border: 1px solid #000;
+            float: left;
+            margin: 10px;
+        }
+        ul li img {
+            width: 400px;
+            height: 450px;
+        }
+    </style>
+    <script>
+        function getPos(obj) {
+            var l = 0;
+            var t = 0;
+            while (obj) {
+                l += obj.offsetLeft;
+                t += obj.offsetTop;
+                obj = obj.offsetParent;
+            }
+            return {left: l, top: t};
+        }
+        window.onresize = window.onscroll = window.onload = function () {
+            var oUl = document.getElementById('ul1');
+            var aImg = oUl.getElementsByTagName('img');
+            // 获取滚动的高度
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            // 获取可视区的高度
+            var clientH = document.documentElement.clientHeight;
+            for (var i = 0; i < aImg.length; i++) {
+                var imgT = getPos(aImg[i]).top;
+                if (scrollTop + clientH >= imgT) {
+                    aImg[i].src = aImg[i].getAttribute('_src');
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+<ul id="ul1">
+    <li><img _src="img/1.png" alt=""></li>
+    <li><img _src="img/2.png" alt=""></li>
+    <li><img _src="img/3.png" alt=""></li>
+    <li><img _src="img/4.png" alt=""></li>
+    <li><img _src="img/5.png" alt=""></li>
+    <li><img _src="img/1.png" alt=""></li>
+    <li><img _src="img/2.png" alt=""></li>
+    <li><img _src="img/3.png" alt=""></li>
+    <li><img _src="img/4.png" alt=""></li>
+    <li><img _src="img/5.png" alt=""></li>
+    <li><img _src="img/1.png" alt=""></li>
+    <li><img _src="img/2.png" alt=""></li>
+</ul>
+</body>
+</html>
