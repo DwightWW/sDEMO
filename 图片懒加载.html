@@ -35,9 +35,7 @@
         window.onresize = window.onscroll = window.onload = function () {
             var oUl = document.getElementById('ul1');
             var aImg = oUl.getElementsByTagName('img');
-            // 获取滚动的高度
             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            // 获取可视区的高度
             var clientH = document.documentElement.clientHeight;
             for (var i = 0; i < aImg.length; i++) {
                 var imgT = getPos(aImg[i]).top;
